@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Kaer Morhen / Witcher visitka — глобальні токени та reset
+   Тема: темне фентезі, пергамент, метал, шкіра. Атмосфера Gwent.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Cinzel+Decorative:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+  /* ---- Колір: пергамент, шкіра, метал, кров, бронза ---- */
+  --void: #0a0806;              /* найглибша темрява фону */
+  --leather-950: #14100c;       /* базовий фон полотна */
+  --leather-900: #1d1712;       /* панелі / картки */
+  --leather-800: #2a2119;       /* підняті панелі, hover */
+  --iron-line: #3d3226;         /* лінії, рамки, роздільники */
+  --iron-line-soft: #2a2119;
+
+  --parchment: #e9dcc0;         /* основний текст на темному */
+  --parchment-dim: #b9a97f;     /* другорядний текст */
+  --parchment-faint: #8a7a5c;   /* підписи, дрібний текст */
+
+  --blood-700: #5c1420;         /* бордовий акцент, глибокий */
+  --blood-600: #7c1c28;         /* бордовий, активний стан */
+  --blood-500: #a3283a;         /* яскравіший бордовий, hover/лінк */
+
+  --bronze-500: #a9803f;        /* бронза */
+  --gold-400: #c9a24e;          /* золото — акцентні деталі, іконки */
+  --gold-300: #dfbf7a;          /* світле золото — hover на бронзі */
+
+  --shadow-deep: rgba(0, 0, 0, 0.65);
+  --shadow-soft: rgba(0, 0, 0, 0.35);
+
+  /* ---- Типографіка ---- */
+  --font-display: 'Cinzel Decorative', 'Cinzel', serif;
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'EB Garamond', Georgia, 'Times New Roman', serif;
+
+  /* ---- Розміри / ритм ---- */
+  --container-w: 920px;
+  --radius-sm: 2px;
+  --gap-section: clamp(3rem, 6vw, 6rem);
+}
+
+/* ---- Reset ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--leather-950);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+
+  /* тонка фактура шкіри/пергаменту без зображень — лишень градієнти */
+  background-image:
+          radial-gradient(ellipse at 50% 0%, rgba(80, 60, 30, 0.12), transparent 55%),
+          radial-gradient(ellipse at 15% 90%, rgba(90, 20, 25, 0.10), transparent 45%),
+          repeating-linear-gradient(
+                  0deg,
+                  rgba(0, 0, 0, 0.15) 0px,
+                  rgba(0, 0, 0, 0.15) 1px,
+                  transparent 1px,
+                  transparent 3px
+          );
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--gold-400);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--parchment);
+  letter-spacing: 0.02em;
+}
+
+::selection {
+  background: var(--blood-600);
+  color: var(--parchment);
+}
+
+/* тонкий бронзовий скролбар — деталь, а не декорація */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--leather-950);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--iron-line);
+  border: 2px solid var(--leather-950);
+}
+
+/* ---- Утиліта: орнаментальний розділювач між секціями ---- */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--iron-line) 20%, var(--iron-line) 80%, transparent);
+  position: relative;
+}
+.divider::after {
+  content: '❖';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--leather-950);
+  color: var(--gold-400);
+  font-size: 0.9rem;
+  padding: 0 0.75rem;
+}

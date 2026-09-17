@@ -1,0 +1,203 @@
+/* ==========================================================================
+   #about — Kaer Morhen, Trial of the Grasses, Witcher
+   Три "сторінки" лору у вигляді пергаментних карток
+   ========================================================================== */
+
+#about {
+    max-width: var(--container-w);
+    margin-inline: auto;
+    padding: var(--gap-section) 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-section);
+}
+
+#about > h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    text-align: center;
+    color: var(--parchment);
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+#about > h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    translate: -50% 0;
+    width: 140px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blood-500), transparent);
+}
+
+/* ---- Спільна "картка" для всіх трьох блоків ---- */
+.story,
+.trial,
+.witcher {
+    position: relative;
+    background: var(--leather-900);
+    border: 1px solid var(--iron-line);
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+}
+
+/* кутові скоби — фірмова деталь картки Gwent */
+.story::before, .story::after,
+.trial::before, .trial::after,
+.witcher::before, .witcher::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--gold-400);
+    opacity: 0.5;
+}
+.story::before, .trial::before, .witcher::before {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+}
+.story::after, .trial::after, .witcher::after {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+}
+
+.story h3,
+.trial h3,
+.witcher h3 {
+    font-size: 1.2rem;
+    letter-spacing: 0.03em;
+    color: var(--gold-300);
+    margin-top: 1.75rem;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--iron-line);
+}
+
+.story p,
+.trial p,
+.witcher p {
+    font-size: 1.08rem;
+    color: var(--parchment-dim);
+    text-align: justify;
+    hyphens: auto;
+}
+
+.story ul,
+.trial ul,
+.witcher ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.story li,
+.trial li,
+.witcher li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--parchment-dim);
+    line-height: 1.6;
+}
+
+.story li::before,
+.trial li::before,
+.witcher li::before {
+    content: '⚔';
+    position: absolute;
+    left: 0;
+    top: 0.05em;
+    color: var(--blood-500);
+    font-size: 0.85em;
+}
+
+.story strong,
+.trial strong,
+.witcher strong {
+    color: var(--gold-400);
+    font-weight: 600;
+}
+
+/* ---- Layout: зображення + текст, у два стовпці на десктопі ---- */
+.story,
+.trial {
+    display: grid;
+    grid-template-columns: minmax(200px, 300px) 1fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+}
+
+.story img,
+.trial img {
+    width: 100%;
+    border: 3px solid var(--bronze-500);
+    box-shadow: 0 20px 40px -14px var(--shadow-deep);
+    position: sticky;
+    top: 1.5rem;
+}
+
+/* дзеркалимо .trial — зображення праворуч, для ритму сторінки */
+.trial {
+    grid-template-columns: 1fr minmax(200px, 300px);
+}
+.trial img {
+    order: 2;
+}
+.trial > *:not(img) {
+    order: 1;
+}
+.trial h3 { order: 1; }
+.trial ul { order: 1; }
+
+/* .trial дітей насправді лінійні — переприв'язуємо порядок явно */
+.trial p:first-of-type { order: 1; }
+
+/* ---- .witcher: банер зверху, дві lore-секції під ним ---- */
+.witcher img {
+    width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 3px solid var(--bronze-500);
+    box-shadow: 0 20px 40px -14px var(--shadow-deep);
+    margin-bottom: 1.5rem;
+}
+
+.witcher h3:nth-of-type(2) {
+    margin-top: 2.25rem;
+}
+
+/* ---- Адаптив ---- */
+@media (max-width: 760px) {
+    .story,
+    .trial {
+        grid-template-columns: 1fr;
+    }
+    .trial img {
+        order: 0;
+    }
+    .story img,
+    .trial img {
+        position: static;
+        max-height: 320px;
+        object-fit: cover;
+    }
+    .story p,
+    .trial p,
+    .witcher p {
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    #about {
+        gap: clamp(2rem, 8vw, 3rem);
+    }
+    .story, .trial, .witcher {
+        padding: 1.25rem;
+    }
+}

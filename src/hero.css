@@ -1,0 +1,142 @@
+/* ==========================================================================
+   Hero — #center
+   Портрет відьмака у рамці-медальйоні + заголовок + контактна "печатка"
+   ========================================================================== */
+
+#center {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.5rem, 4vw, 2.75rem);
+    padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+    text-align: center;
+    overflow: hidden;
+
+    background: radial-gradient(ellipse at 50% 20%, var(--leather-900) 0%, var(--void) 75%);
+}
+
+/* декоративні кутові скоби, як на карті Gwent */
+#center::before,
+#center::after {
+    content: '';
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--bronze-500);
+    opacity: 0.55;
+    pointer-events: none;
+}
+#center::before {
+    top: 24px;
+    left: 24px;
+    border-right: none;
+    border-bottom: none;
+}
+#center::after {
+    bottom: 24px;
+    right: 24px;
+    border-left: none;
+    border-top: none;
+}
+
+#center h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+    color: var(--parchment);
+    text-shadow: 0 2px 18px var(--shadow-deep);
+    max-width: 16ch;
+    position: relative;
+    padding-bottom: 1.25rem;
+}
+
+#center h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    translate: -50% 0;
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
+}
+
+/* ---- Портрет ---- */
+.hero {
+    position: relative;
+    width: clamp(220px, 32vw, 320px);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: -14px;
+    border: 1px solid var(--iron-line);
+    border-radius: 50%;
+}
+
+.hero img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--bronze-500);
+    box-shadow:
+            0 0 0 1px var(--void),
+            0 25px 50px -12px var(--shadow-deep),
+            inset 0 0 40px rgba(0, 0, 0, 0.5);
+    filter: grayscale(0.15) contrast(1.05);
+}
+
+/* ---- Контактний блок (друга картка в #center) ---- */
+.hero + div {
+    background: var(--leather-900);
+    border: 1px solid var(--iron-line);
+    padding: 1.75rem clamp(1.75rem, 5vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+    position: relative;
+}
+
+.hero + div::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(169, 128, 63, 0.35);
+    pointer-events: none;
+}
+
+.hero + div p {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    letter-spacing: 0.06em;
+    color: var(--gold-300);
+    text-transform: uppercase;
+}
+
+.hero + div a {
+    font-size: 1.05rem;
+    color: var(--parchment-dim);
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.hero + div a:hover,
+.hero + div a:focus-visible {
+    color: var(--gold-300);
+    border-bottom-color: var(--blood-500);
+}
+
+/* ---- Адаптив ---- */
+@media (max-width: 640px) {
+    .hero {
+        width: min(60vw, 240px);
+    }
+    #center h1 {
+        max-width: 18ch;
+    }
+}
